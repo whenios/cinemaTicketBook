@@ -19,9 +19,6 @@ function person(user){
 	this.ownSeats=[];
 }
 
-function simpleCheck(form){
-
-}
 
 
 
@@ -40,11 +37,21 @@ function bookTicket($scope){
 	for(var m=1;m<=$scope.maxSeatsNumber;m++){
 		$scope.seats.push((new seat(m)));
 	}
+
+	$scope.checkNumber2=function(event){
+		var keyValue=String.fromCharCode(event.keyCode);
+		if(!/\d/.test(keyValue)){
+			event.preventDefault();
+			alert("请输入小于10数字");
+		}
+	}
 }
 
 
 
 function formCtrl($scope){
+
+
 
 	$scope.update=function(users,myform){
 		if(myform==false){
