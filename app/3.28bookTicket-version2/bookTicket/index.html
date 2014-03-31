@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app >
+<head>
+	
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<script src="angular.js"></script>
+	<script src="jquery.js"></script>
+	<script src="bookTicketApp.js"></script>
+	<style type="text/css">
+	form{
+		margin:50px 10px; 
+	}
+	.blue{
+		background-color:#0099cb;
+	}
+	.red{
+		background-color: red;
+		font-weight: bold;
+	}
+	.green{
+		background-color: green;
+	}
+
+	</style>
+</head>
+<body ng-controller="bookTicket">
+
+	<form ng-controller="formCtrl" novalidate class="form-inline" name="myform">
+		Name:<input type="text"ng-model="users.name" required />
+		Age:<input type="number" ng-model="users.age"/>
+		PhoneNumber:<input type="text" ng-model="users.phoneNumber"/>
+		number:<input type="number" min=1 max=10 ng-model="users.ticketNumber">
+		<!-- 	<button  class="btn btn-primary" ng-click="update(users)">提交</button> -->
+		<input type="submit" ng-click="update(users,myform.$valid)">
+		<input type="checkbox" ng-model="Boxchecked" ng-click="chooseChild(Boxchecked)">Kids
+<p>myform.$valid : {{myform.$valid}}</p>
+	</form>
+	
+	<div ng-controller="tableCtrl" class="row-fluid">
+		<div class="span4">
+			<table class="table">
+				<tr>
+					<td>姓名</td>
+					<td>年龄</td>
+					<td>电话</td>
+					<td>数量</td>
+				</tr>
+				<tr ng-repeat="user in mumber| filter:query" ng-mouseenter="colorTable($index)" ng-mouseleave="uncolorTable($index)" >
+					<td> {{user.name}}</td>
+					<td> {{user.age}}</td>
+					<td> {{user.phoneNumber}}</td>
+					<td> {{user.ticketNumber}}</td>
+				</tr>	
+			</table>
+		</div>
+		<div class="span6">
+			<table id="seat" class="table-bordered table-condensed table">
+				<tr ng-repeat="i in tableLow">			
+					<td ng-repeat="j in tableRow" id="{{i*6+j}}" class="{{seats[i*6+j].className }}" ng-class="{'blue':seats[i*6+j].isBooked,'red':seats[i*6+j].ismarked}">{{seats[i*6+j].uid}}</td>
+				</tr>
+
+			</table>
+		</div>
+		
+	</div>
+	<p>{{totalNum}}</p>
+
+</body>
+</html>
+
